@@ -13,30 +13,31 @@ ui <- navbarPage(theme = shinytheme("readable"),
            sidebarLayout(
              sidebarPanel(
                tags$h2("Choose the types of cryptocurrency you want to compare"),
-               selectInput(
-                 "crypto_a",
-                 label = "The first cryptocurrency",
-                 choices = c("a", "b")
-                 ),
-               selectInput(
-                 "crypto_b",
-                 label = "The Second cryptocurrency",
-                 choices = c("a", "b")
+               textInput(
+                 "crypto_1",
+                 label = "First cryptocurrency"
+               ),
+               textInput(
+                 "crypto_2",
+                 label = "Second cryptocurrency"
                ),
                selectInput(
                  "time_year",
                  label = "Year",
-                 choices = c("a", "b")
+                 choices = c("2014", "2015", "2016", "2017", "2018")
                ),
                selectInput(
                  "time_month",
                  label = "Month",
-                 choices = c("a", "b")
+                 choices = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+                             "Aug", "Sep", "Oct", "Nov", "Dec")
                )
              ),
              mainPanel(
                tags$h3("Here is the first plot"),
-               tags$h3("Here is the second plot")
+               plotOutput("crptoline_1"),
+               tags$h3("Here is the second plot"),
+               plotOutput("cryptoline_2")
              )
            )
            ),
