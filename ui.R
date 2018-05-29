@@ -43,7 +43,32 @@ ui <- navbarPage(theme = shinytheme("readable"),
            ),
   tabPanel("Twitter"),
   tabPanel("Recommendation"),
-  tabPanel("Feedback")
+  tabPanel("Feedback",
+           titlePanel("Your Feedbacks"),
+           sliderInput(
+             "feedback_1",
+             label = "1. Overall, how would you rate our app ?",
+             min = 0, max = 10, value = 5
+           ),
+           sliderInput(
+             "feedback_2",
+             label = "2. How would you rate the layout of the app ?",
+             min = 0, max = 10, value = 5
+           ),
+           sliderInput(
+             "feedback_3",
+             label = "3. How would you rate the usability of the app ?",
+             min = 0, max = 10, value = 5
+           ),
+           textInput(
+             "feedback_4",
+             label = "4. Please give us some advices about the part we can improve on"
+           ),
+           actionButton(
+             "feedback_submit",
+             label = "submit"
+           )
+  )
 )
 # Call the ui
 shinyUI(ui)
