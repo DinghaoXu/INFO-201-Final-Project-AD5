@@ -61,21 +61,18 @@ server <- function(input, output) {
   output$bayesian_plot <- renderPlot({
     plot(model1, ylim = c(0,10000))
   })
-  
-  
-  
-  
-  
-  
-  
+  output$szn_analysis <- renderPlot({
+    plot(szn_analysis)
+  })
+
   # Change the next four lines based on your own consumer_key, consume_secret, access_token, and access_secret.
   consumer_key <- api_consumer_key
   consumer_secret <- api_consumer_secret
   access_token <- api_access_token
   access_secret <- api_access_secret
-  
+
   setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
-  
+
    tweets <- reactive({
      tw = twitteR::searchTwitter(input$keyword, n=300, lang = "en")
      tweets <- twitteR::twListToDF(tw)
@@ -83,19 +80,19 @@ server <- function(input, output) {
      colnames(tweets) <- c("Tweet", "Date_and_Time", "Screen_Name")
    return(tweets)
    })
-  
+
   output$plot <- renderPlot({
   text <- ""
-  
+
   for (row in 1:300) {
     text <- paste(text, tweets()[row,1])
   }
-  
+
   data <- Corpus(VectorSource(text))
-  
+
   toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
   data <- tm_map(data, toSpace, " ' ")
-  
+
   # Convert the text to lower case
   data <- tm_map(data, content_transformer(tolower))
   # Remove numbers
@@ -109,12 +106,12 @@ server <- function(input, output) {
   data <- tm_map(data, removePunctuation)
   # Eliminate extra white spaces
   data <- tm_map(data, stripWhitespace)
-  
+
   dtm <- TermDocumentMatrix(data)
   m <- as.matrix(dtm)
   v <- sort(rowSums(m),decreasing=TRUE)
   d <- data.frame(word = names(v),freq=v)
-  
+
   for (row in 1:nrow(d)) {
     if(grepl("true", d[row,1]) || grepl("false", d[row,1]) || grepl("http", d[row,1]) || grepl("href", d[row,1]) || grepl("twitter", d[row,1]) || grepl("web", d[row,1]) || grepl("client", d[row,1])) {
       d <- d[-row,]
@@ -124,7 +121,7 @@ server <- function(input, output) {
               max.words=350, random.order=FALSE, rot.per=0.35,
               colors=brewer.pal(8, "Dark2")))
   })
-  
+
   output$tweets <- DT::renderDataTable({
     return(DT::datatable(tweets(), options = list(lengthMenu = c(5, 30, 50, 100), pageLength = 5)))
   })
