@@ -10,24 +10,29 @@ library("RColorBrewer")
 
 # Define the ui
 ui <- navbarPage(
-  theme = shinytheme("readable"),
+  theme = shinytheme("darkly"),
   tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
 
   tabPanel("Introduction"),
   titlePanel("KOYN"),
   mainPanel(
+            style = "font-family: 'Source Sans Pro';
+            color: #fff; text-align: center;
+            background-image: url('https://i.imgur.com/7T9364v.gif?noredirect');
+            padding: 20px",
     h1("Everything you need to know to be on top of your coin.", align = "center"),
-    img(src='https://goo.gl/images/ZQQiZQ', alt = "blockchain"),
+    # img(src='https://i.imgur.com/7T9364v.gif?noredirect', alt = "blockchain"),
     p("KOYN is an", em("interactive"), "outlet for you to learn not
-    only basic information regarding your coin, but also deeper 
-    insights and comparisons to support you in your investments. 
+    only basic information regarding your coin, but also deeper
+    insights and comparisons to support you in your investments.
     The data is provided by", a("Twitter", href = 'https://developer.twitter.com/en/docs.html'),
-      "and by user", a("pmohun", href = 'https://www.kaggle.com/philmohun/cryptocurrency-financial-data'),
+      "and by users ", a("pmohun", href = 'https://www.kaggle.com/philmohun/cryptocurrency-financial-data'), "and",
+      a("Arvindham Rameshbabu", href = 'https://www.kaggle.com/ara0303/forecasting-of-bitcoin-prices/data'),
       "on Kaggle, which we rendered based on", em("common demands"), "we saw in our user research.
-    KOYN provides three main functionalities-- an 
+    KOYN provides three main functionalities-- an
     illustration of", strong("coin volatility"), ", a live twitter feed for",
       strong("updated news"), ", and a", strong("prediction model"), "for your coin."),
-    h3("Knowing your coin is essential for successful investments. 
+    h3("Knowing your coin is essential for successful investments.
      We make your coin make sense.", align = "center")
   ),
   tabPanel("Coin volatility",
@@ -78,16 +83,14 @@ tabPanel(
       mainPanel(
         plotOutput("plot", width = "200%", height = "200%")
       )))),
-  tabPanel("Holt's Forecasting Model:",
+  tabPanel("Bitcoin Forecasting Models:",
            mainPanel(
-           plotOutput("holt_plot"))),
-  tabPanel("Exponential Triple Smoothing Model:",
-           mainPanel(
-           plotOutput("ets_plot"))),
-  tabPanel("ARIMA Forecasting Model:",
-           plotOutput("arima_plot")),
-  tabPanel("Bayesian Forecasting Model:",
-           plotOutput("bayesian_plot")),
+            plotOutput("szn_analysis"),
+            plotOutput("holt_plot"),
+            plotOutput("ets_plot"),
+            plotOutput("arima_plot"),
+            plotOutput("bayesian_plot"))
+  ),
   tabPanel("Feedback",
            titlePanel("Your Feedbacks"),
            sliderInput(

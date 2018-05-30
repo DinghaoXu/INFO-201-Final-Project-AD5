@@ -132,6 +132,9 @@ server <- function(input, output) {
   output$bayesian_plot <- renderPlot({
     plot(model1, ylim = c(0,10000))
   })
+  output$szn_analysis <- renderPlot({
+    plot(szn_analysis)
+  })
 
   output$plot <- renderPlot({
     wordcloud(words = d$word, freq = d$freq, min.freq = 3,
