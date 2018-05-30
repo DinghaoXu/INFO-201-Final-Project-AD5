@@ -122,16 +122,16 @@ server <- function(input, output) {
     p
   })
   output$ets_plot <- renderPlot({
-    ets_plot
+    plot(forecast(ETS, h = 10), ylim = c(0,10000))
   })
   output$holt_plot <- renderPlot({
-    holt_plot
+    plot(holtf, ylim = c(0,10000))
   })
   output$arima_plot <- renderPlot({
-    arima_plot
+    plot(forecast(gege, h = 10), ylim = c(0,10000))
   })
   output$bayesian_plot <- renderPlot({
-    bayesian_plot
+    plot(model1, ylim = c(0,10000))
   })
   
   output$plot <- renderPlot({

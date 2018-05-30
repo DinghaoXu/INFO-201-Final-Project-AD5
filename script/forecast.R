@@ -65,10 +65,10 @@ plot(dects)
 holtt <-  holt(Train[1289:1655,'Close'], type = "additive", damped = F) #holt forecast values
 holtf <- forecast(holtt, h = 10)
 holtdf <- as.data.frame(holtf)
-plot(holtf, ylim = c(0,10000))
+holt_plot <- plot(holtf, ylim = c(0,10000))
 holtfdf <- cbind(test, holtdf[,1])
 accuracy(holtdf[,1], testdata)
-holt_plot <- ggplot() + geom_line(data = holtfdf, aes(Date, holtfdf[,2]), color = "blue") + geom_line(data = holtfdf, aes(Date, holtfdf[,3]), color = "Dark Red")
+ggplot() + geom_line(data = holtfdf, aes(Date, holtfdf[,2]), color = "blue") + geom_line(data = holtfdf, aes(Date, holtfdf[,3]), color = "Dark Red")
 
 
 # ------------------------- ETS MODEL -------------------------
@@ -78,6 +78,8 @@ etsdf <- as.data.frame(ETSf)
 ets_plot <- plot(forecast(ETS, h = 10), ylim = c(0,10000)) #ETS forecast plot works perfectly
 etsp <- predict(ETS, n.ahead = 10, prediction.interval = T, level = 0.95)
 accuracy(etsdf[,1], testdata)
+
+ets_plot
 
 # ------------------------- TESTS TO SEE TSDF ACCURACY -------------------------
 
@@ -101,7 +103,7 @@ ss <- AddSeasonal(ss, Train[,4], nseasons = 365) #Adding seasonal trend to model
 model1 <- bsts(Train[,4],
                state.specification = ss,
                niter = 10)
-
+# ---------------------- Bayesian Plot ------------------------
 bayesian_plot <- plot(model1, ylim = c(0,10000)) #Plot based on bayesian regression of the model
 bayesian_plot
 pred1 <- predict(model1, horizon = 10)
