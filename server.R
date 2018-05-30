@@ -1,5 +1,4 @@
-#install.packages("twitteR")
-#install.packages("RCurl")
+#set up
 library(RCurl)
 library(twitteR)
 library(httr)
@@ -14,14 +13,17 @@ library("tm")
 library("SnowballC")
 library("RColorBrewer")
 library(DT)
+library(plotly)
 source("script/api-key.R")
 source("script/functions.R")
 source("script/forecast.R")
-library(plotly)
+
 
 
 # Define the server
 server <- function(input, output) {
+  
+  #renders line plot to show crypto volatility based on month and year inputs and specified currency
   output$crptoline_1 <- renderPlot({
     coin_history_wanted_1 <- coin_history %>%
       filter(Currency == input$crypto_1) %>%
@@ -36,6 +38,8 @@ server <- function(input, output) {
       theme_solarized()
     p
   })
+  
+  #renders line plot to show crypto volatility based on month and year inputs and specified currency
   output$cryptoline_2 <- renderPlot({
     coin_history_wanted_2 <- coin_history %>%
       filter(Currency == input$crypto_2) %>%
@@ -51,6 +55,7 @@ server <- function(input, output) {
     p
   })
   
+  #renders piechart to show the percentage of currencies compared to each other based on on month and year inputs
   output$piechart <- renderPlotly({
     wanted_data <- coin_history %>% filter(year == input$time_year) %>%
       filter(month == input$time_month)
@@ -75,30 +80,41 @@ server <- function(input, output) {
     
   })
   
+  #render plot
   output$ets_plot <- renderPlot({
     plot(forecast(ETS, h = 10), ylim = c(0,10000))
   })
+  
+  #render plot
   output$holt_plot <- renderPlot({
     plot(holtf, ylim = c(0,10000))
   })
+  
+  #render plot
   output$arima_plot <- renderPlot({
     plot(forecast(gege, h = 10), ylim = c(0,10000))
   })
+  
+  #render plot
   output$bayesian_plot <- renderPlot({
     plot(model1, ylim = c(0,10000))
   })
+  
+  #render plot
   output$szn_analysis <- renderPlot({
     plot(szn_analysis)
   })
 
-  # Change the next four lines based on your own consumer_key, consume_secret, access_token, and access_secret.
+  #OAuth keys for twitter api
   consumer_key <- api_consumer_key
   consumer_secret <- api_consumer_secret
   access_token <- api_access_token
   access_secret <- api_access_secret
 
+  #Setup for twitter oauth
   setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
 
+  #Reactive function to recieve a dataframe of tweets specific on keywords inputed
    tweets <- reactive({
      tw = twitteR::searchTwitter(input$keyword, n=300, lang = "en")
      tweets <- twitteR::twListToDF(tw)
@@ -107,15 +123,19 @@ server <- function(input, output) {
    return(tweets)
    })
 
+   #Renders a wordcloud based on frequency of words that show up when specific keywords are searched
   output$plot <- renderPlot({
   text <- ""
-
+  
+  #grabs all the tweets from dataframe
   for (row in 1:300) {
     text <- paste(text, tweets()[row,1])
   }
 
+  #formats text for text mining
   data <- Corpus(VectorSource(text))
-
+  
+  #gets rid of spacing
   toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
   data <- tm_map(data, toSpace, " ' ")
 
@@ -132,7 +152,8 @@ server <- function(input, output) {
   data <- tm_map(data, removePunctuation)
   # Eliminate extra white spaces
   data <- tm_map(data, stripWhitespace)
-
+  
+  #
   dtm <- TermDocumentMatrix(data)
   m <- as.matrix(dtm)
   v <- sort(rowSums(m),decreasing=TRUE)
@@ -148,6 +169,7 @@ server <- function(input, output) {
               colors=brewer.pal(8, "Dark2")))
   })
 
+  #returns datatable to view the dataframe of tweets
   output$tweets <- DT::renderDataTable({
     return(DT::datatable(tweets(), options = list(lengthMenu = c(5, 30, 50, 100), pageLength = 5)))
   })
