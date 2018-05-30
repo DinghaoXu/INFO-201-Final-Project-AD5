@@ -105,23 +105,23 @@ ggplot() + geom_line(data = gegefct, aes(Date, gegefct[,2]), color = "blue") + g
 
 
 # ---------------------- Bayesian Plot ------------------------
-ss <- AddLocalLinearTrend(list(), Train[,4]) #Adding linear trend to model
-ss <- AddSeasonal(ss, Train[,4], nseasons = 365) #Adding seasonal trend to model
-model1 <- bsts(Train[,4],
+#ss <- AddLocalLinearTrend(list(), Train[,4]) #Adding linear trend to model
+#ss <- AddSeasonal(ss, Train[,4], nseasons = 365) #Adding seasonal trend to model
+#model1 <- bsts(Train[,4],
                state.specification = ss,
                niter = 10)
-bayesian_plot <- plot(model1, ylim = c(0,10000)) #Plot based on bayesian regression of the model
-bayesian_plot
-pred1 <- predict(model1, horizon = 10)
-plot(pred1, plot.original = 50,ylim = c(0,9000))
-pred1$mean
-accuracy(pred1$mean, testdata)
+#bayesian_plot <- plot(model1, ylim = c(0,10000)) #Plot based on bayesian regression of the model
+#bayesian_plot
+#pred1 <- predict(model1, horizon = 10)
+#plot(pred1, plot.original = 50,ylim = c(0,9000))
+#pred1$mean
+#accuracy(pred1$mean, testdata)
 
-model2 <- bsts(Close ~ ., state.specification = ss,
+#model2 <- bsts(Close ~ ., state.specification = ss,
                niter = 10,
                data = as.data.frame(Train))
-model3 <- bsts(Close ~ ., state.specification = ss,
+#model3 <- bsts(Close ~ ., state.specification = ss,
                niter = 10,
                data = as.data.frame(Train),
                expected.model.size = 10)
-CompareBstsModels(list("Model 1" = model1, "Model 2" = model2, "Model 3" = model3), colors = c("blue", "red", "green"))
+#CompareBstsModels(list("Model 1" = model1, "Model 2" = model2, "Model 3" = model3), colors = c("blue", "red", "green"))

@@ -13,8 +13,8 @@ df <- read.csv("data/coins.csv", stringsAsFactors = FALSE)
 coin_volume <- df$Volume
 currency <- df$Currency
 # Barplot
-bp<- ggplot(coin_volume, aes(x="", y=coin_volume, fill= currency))+
+#bp<- ggplot(coin_volume, aes(x="", y=coin_volume, fill= currency))+
   geom_bar(width = 1, stat = "identity")
-bp
-pie <- bp + coord_polar("y", start=0)
-pie
+#bp
+#pie <- bp + coord_polar("y", start=0)
+#pie

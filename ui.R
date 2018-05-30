@@ -40,7 +40,7 @@ ui <- navbarPage(
            titlePanel("Coin Volatility"),
            sidebarLayout(
              sidebarPanel(
-               tags$h2("Choose the types of cryptocurrency you want to compare"),
+               tags$h2("Please choose the coins you would like to compare:"),
                textInput(
                  "crypto_1",
                  label = "First cryptocurrency"
@@ -83,15 +83,31 @@ tabPanel(
           "keyword",
           label = "Type a Keyword", value = "#bitcoin"
         ),
-        plotOutput("plot")  
+        plotOutput("plot")
       ),
-      
+
       # Main panel which displays barplot
       mainPanel(
-        
+
         DT::dataTableOutput("tweets")
       )))),
   tabPanel("Bitcoin Forecasting Models:",
+           sidebarLayout(
+             sidebarPanel(
+               helpText("Create a dynamic plot to analyze trends between total
+                        population and Race Percentages."),
+
+               selectInput(
+                 "Model Type",
+                 label = "Race To Observe",
+                 choices = list(
+                   "ARIMA" = "arima_plot",
+                   "BAYES" = "bayesian_plot",
+                   "HOLT" = "holt_plot",
+                   "ETS" = "ets_plot"
+                 )
+               )
+               ),
            mainPanel(
             plotOutput("szn_analysis"),
             plotOutput("holt_plot"),
@@ -170,6 +186,7 @@ tabPanel(
              img(src = )
            )
            )
+)
 )
   # Call the ui
   shinyUI(ui)
