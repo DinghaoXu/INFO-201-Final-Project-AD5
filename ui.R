@@ -93,12 +93,19 @@ tabPanel(
         sliderInput(
           "min_freq_slider",
           label = h3("Minimum Frequency:"), min = 1,
-          max = 10, value = 3
-        )
+          max = 20, value = 3
+        ),
+        textInput(
+          "keyword",
+          label = "Type a Keyword", value = "#bitcoin"
+        ),
+        plotOutput("plot")  
       ),
+      
       # Main panel which displays barplot
       mainPanel(
-        plotOutput("plot", width = "200%", height = "200%")
+        
+        DT::dataTableOutput("tweets")
       )))),
   tabPanel("Holt's Forecasting Model:",
            mainPanel(
