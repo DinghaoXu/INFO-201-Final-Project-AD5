@@ -14,6 +14,22 @@ ui <- navbarPage(
   tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
 
   tabPanel("Introduction"),
+  titlePanel("KOYN"),
+  mainPanel(
+    h1("Everything you need to know to be on top of your coin.", align = "center"),
+    img(src='https://goo.gl/images/ZQQiZQ', alt = "blockchain"),
+    p("KOYN is an", em("interactive"), "outlet for you to learn not
+    only basic information regarding your coin, but also deeper 
+    insights and comparisons to support you in your investments. 
+    The data is provided by", a("Twitter", href = 'https://developer.twitter.com/en/docs.html'),
+      "and by user", a("pmohun", href = 'https://www.kaggle.com/philmohun/cryptocurrency-financial-data'),
+      "on Kaggle, which we rendered based on", em("common demands"), "we saw in our user research.
+    KOYN provides three main functionalities-- an 
+    illustration of", strong("coin volatility"), ", a live twitter feed for",
+      strong("updated news"), ", and a", strong("prediction model"), "for your coin."),
+    h3("Knowing your coin is essential for successful investments. 
+     We make your coin make sense.", align = "center")
+  ),
   tabPanel("Coin volatility",
            titlePanel("Coin Volatility"),
            sidebarLayout(
