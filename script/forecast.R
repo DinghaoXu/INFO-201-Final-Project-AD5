@@ -97,7 +97,7 @@ acf(tsdf)
 pacf(tsdf)
 gege <- arima(Train[,4], order = c(4,2,11))
 gegef <- as.data.frame(forecast(gege, h = 10))
-arim_accuracy <- accuracy(gegef[,1], testdata)
+arima_accuracy <- accuracy(gegef[,1], testdata)
 gegefct <- cbind(test, gegef[,1])
 arima_plot <- plot(forecast(gege, h = 10), ylim = c(0,10000))
 # this plot is comparing the two tyes of arima model types
