@@ -42,7 +42,10 @@ ui <- navbarPage(theme = shinytheme("readable"),
            )
            ),
   tabPanel("Twitter"),
-  tabPanel("Recommendation"),
+  tabPanel("Holt's Forecasting Model:"),
+  tabPanel("Exponential Triple Smoothing:"),
+  tabPanel("ARIMA forecasting:"),
+  tabPanel("Forecasting using Bayesian Regression:"),
   tabPanel("Feedback",
            titlePanel("Your Feedbacks"),
            sliderInput(
