@@ -97,18 +97,18 @@ server <- function(input, output) {
 
   
   output$holt_acc <- renderText({
-    holt_accuracy
+    paste0("Accuracy of Mdoel: ", 100 - holt_accuracy[5], "%")
   })
   
   output$ets_acc <- renderText({
-    ets_accuracy
+    paste0("Accuracy of Mdoel: ", 100 - ets_accuracy[5], "%")
   })
   output$arima_acc <- renderText({
-    arima_accuracy
+    paste0("Accuracy of Mdoel: ", 100 - arima_accuracy[5], "%")
   })
-  ##output$bayes_acc <- renderText({
-  #  bayes_accuracy
- # })#
+  output$bayes_acc <- renderText({
+     paste0("Accuracy of Mdoel: ", 100 - bayes_accuracy[5], "%")
+  })
   
   output$ets <- renderPlot({
     plot(forecast(ETS, h = 10), ylim = c(0,20000), xlab = "Days from 2017", ylab = "Price")
@@ -119,9 +119,9 @@ server <- function(input, output) {
   output$arima <- renderPlot({
     plot(forecast(gege, h = 10), ylim = c(0,20000), xlab = "Days from 2017", ylab = "Price")
   })
-#  output$bayes <- renderPlot({
- #   plot(model1, ylim = c(0,20000), xlab = "Days from 2017", ylab = "Price")
- # })
+ output$bayes <- renderPlot({
+    plot(model1, ylim = c(0,20000), xlab = "Days from 2017", ylab = "Price")
+  })
   
   #render plot
   output$szn_analysis <- renderPlot({

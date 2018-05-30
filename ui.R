@@ -127,9 +127,9 @@ ui <- navbarPage(
         plotOutput("ets"),
         textOutput("ets_acc"),
         plotOutput("arima"),
-        textOutput("arima_acc")
-       # plotOutput("bayes"),
-        #textOutput("bayes_acc")
+        textOutput("arima_acc"),
+        plotOutput("bayes"),
+        textOutput("bayes_acc")
         
       )
     )
@@ -162,51 +162,52 @@ ui <- navbarPage(
       "feedback_submit",
       label = "submit"
     )
-  )
+  ),
 
   # About Us Layout
-  # tabPanel("About Us",
-  #          titlePanel("KOYN"),
-  #          mainPanel(
-  #            h3("What is cryptocurrency?"),
-  #            p(
-  #              "Cryptocurrency is, in essence,", em("virtual money"), "that
-  #              can be exchanged online. Unlike centralized banking systems that
-  #              control physical currency, cryptocurrency is controlled
-  #              by what is known as", strong("blockchain technology"), "which
-  #              serves as a public transaction database. The price of
-  #              cryptocurrency can easily fluctuate based on its
-  #              ", em("supply and demand"), ". That is why, for
-  #              example, Bitcoin's value rose up so much and then
-  #              dropped in a short amount of time. Cryptocurrency is without
-  #              a doubt a potential solution for currency altogether in the
-  #              future-- that's why its important for us to learn more about it.
-  #              To be successful in investing in cryptocurrency, the data is the
-  #              most important factor to consider. It tells trends that could
-  #              help us predict how the currency will act in the future.",
-  #              align = "center"
-  #            ),
-  #            h3("Why KOYN?"),
-  #            p(
-  #              "With the growing popularity of", em("cryptocurrency"),
-  #              ", more and more people want to know what it is and how to start
-  #              investing in it. For anyone who may be interested in investing
-  #              in cryptocurrency, we provide", em("essential"), "information
-  #              that supports them in their decision making to make the most",
-  #              strong("profit"), "off of their efforts. The pieces are all
-  #              there for anyone to succeed in the", strong("crypto-market"),
-  #              "-- KOYN is just the gateway for you to", em("fully"),
-  #              "understand your coin.", align = "center"
-  #            ),
-  #            p(
-  #              a("See our work here.", href = 'https://github.com/DinghaoXu/INFO-201-Final-Project-AD5')
-  #            ),
-  #            #h3(
-  #             # "Our Team""
-  #            ),
-  #            #img(src = 'https://www.linkedin.com/in/sharanjhangiani/detail/photo/',
-  #              #  alt = "Sharan", a("sharan", href = 'https://www.linkedin.com/in/sharanjhangiani/')
-  #            )
+  tabPanel("About Us",
+  titlePanel("KOYN"),
+  mainPanel(
+    h3("What is cryptocurrency?"),
+    p(
+      "Cryptocurrency is, in essence,", em("virtual money"), "that
+      can be exchanged online. Unlike centralized banking systems that
+      control physical currency, cryptocurrency is controlled
+      by what is known as", strong("blockchain technology"), "which
+      serves as a public transaction database. The price of
+      cryptocurrency can easily fluctuate based on its
+      ", em("supply and demand"), ". That is why, for
+      example, Bitcoin's value rose up so much and then
+      dropped in a short amount of time. Cryptocurrency is without
+      a doubt a potential solution for currency altogether in the
+      future-- that's why its important for us to learn more about it.
+      To be successful in investing in cryptocurrency, the data is the
+      most important factor to consider. It tells trends that could
+      help us predict how the currency will act in the future.",
+      align = "center"
+    ),
+    h3("Why KOYN?"),
+    p(
+      "With the growing popularity of", em("cryptocurrency"),
+      ", more and more people want to know what it is and how to start
+      investing in it. For anyone who may be interested in investing
+      in cryptocurrency, we provide", em("essential"), "information
+      that supports them in their decision making to make the most",
+      strong("profit"), "off of their efforts. The pieces are all
+      there for anyone to succeed in the", strong("crypto-market"),
+      "-- KOYN is just the gateway for you to", em("fully"),
+      "understand your coin.", align = "center"
+    ),
+    p(
+      a("See our work here.", href = 'https://github.com/DinghaoXu/INFO-201-Final-Project-AD5')
+    ),
+    h3(
+      "Our Team"
+    ),
+    h3(
+      "Dayoung Cheong, Dinghao Xu, Sharan Jhangiani, and Robert Dixon"
+    )
+  ))
 )
 
 # Call the ui
