@@ -13,7 +13,7 @@ library("wordcloud")
 library("tm")
 library("SnowballC")
 library("RColorBrewer")
-#source("script/api-key.R")
+source("script/api-key.R")
 source("script/functions.R")
 source("script/forecast.R")
 
@@ -21,10 +21,10 @@ source("script/forecast.R")
 
 
 # Change the next four lines based on your own consumer_key, consume_secret, access_token, and access_secret.
-consumer_key <- "Xg8vT7FzyHPHtgTmgOyezAE82"
-consumer_secret <- "B9jZ8RqOW87Fhdz7NQeAO4GMp8JLcPFgHL0nxN7730EbojcrlD"
-access_token <- "1012610244-LeiPJYlrZVkJrANOQmTsf2ohpBrg2AYsFAjZZfd"
-access_secret <- "mzXiNGcNVQnJcLjyoKgcmxNL84liz65ErkG7cz1fep65F"
+consumer_key <- api_consumer_key
+consumer_secret <- api_consumer_secret
+access_token <- api_access_token
+access_secret <- api_access_secret
 
 setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
 tw = twitteR::searchTwitter('#bitcoin', n=300, lang = "en")
