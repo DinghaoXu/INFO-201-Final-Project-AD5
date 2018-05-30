@@ -143,9 +143,9 @@ tabPanel(
            )
   ),
   tabPanel("About Us",
-           titlePanel("KOYN", align = "center"),
+           titlePanel("KOYN"),
            mainPanel(
-             h3("What is cryptocurrency?", align = "center"),
+             h3("What is cryptocurrency?"),
              p(
                "Cryptocurrency is, in essence,", em("virtual money"), "that
                can be exchanged online. Unlike centralized banking systems that
@@ -160,10 +160,9 @@ tabPanel(
                future-- that's why its important for us to learn more about it.
                To be successful in investing in cryptocurrency, the data is the
                most important factor to consider. It tells trends that could
-               help us predict how the currency will act in the future.",
-               align = "center"
+               help us predict how the currency will act in the future."
              ),
-             h3("Why KOYN?", align = "center"),
+             h3("Why KOYN?"),
              p(
                "With the growing popularity of", em("cryptocurrency"),
                ", more and more people want to know what it is and how to start
@@ -173,17 +172,17 @@ tabPanel(
                strong("profit"), "off of their efforts. The pieces are all
                there for anyone to succeed in the", strong("crypto-market"),
                "-- KOYN is just the gateway for you to", em("fully"),
-               "understand your coin.", align = "center"
+               "understand your coin."
              ),
              p(
                a("See our work here.", href = 'https://github.com/DinghaoXu/INFO-201-Final-Project-AD5')
              ),
              h3(
-               "Our Team", align = "center"
+               "Our Team"
              ),
-             img(src = 'https://www.linkedin.com/in/sharanjhangiani/detail/photo/',
-                 alt = "Sharan", align = "left", a("sharan", href = 'https://www.linkedin.com/in/sharanjhangiani/'
-             ))
+             h3(
+               "Dayoung Cheong, Dinghao Xu, Sharan Jhangiani, Robert Dixon"
+             )
            )
            )
 )
