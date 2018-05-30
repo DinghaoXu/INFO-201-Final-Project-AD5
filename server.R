@@ -9,50 +9,16 @@ library(shinythemes)
 library(dplyr)
 library(ggplot2)
 library(ggthemes)
-
-source("script/functions.R")
-source("script/forecast.R")
-
-# Define the server
-server <- function(input, output) {
-  output$crptoline_1 <- renderPlot({
-    coin_history_wanted_1 <- coin_history %>%
-      filter(Currency == input$crypto_1) %>%
-      filter(year == input$time_year) %>%
-      filter(month == input$time_month)
-    title <- paste0(input$crypto_1, " in ", input$time_month, ", ", input$time_year)
-    x <- coin_history_wanted_1$day
-    y <- coin_history_wanted_1$average
-    p <- ggplot() +
-      geom_line(mapping = aes(x = x, y = y), color = "blue") +
-      labs(title = title, x = "Date", y = "Exchange Rate") +
-      theme_solarized()
-    p
-  })
-  output$cryptoline_2 <- renderPlot({
-    coin_history_wanted_2 <- coin_history %>%
-      filter(Currency == input$crypto_2) %>%
-      filter(year == input$time_year) %>%
-      filter(month == input$time_month)
-    title <- paste0(input$crypto_2, " in ", input$time_month, ", ", input$time_year)
-    x <- coin_history_wanted_2$average
-    y <- coin_history_wanted_2$day
-    p <- ggplot() +
-      geom_line(mapping = aes(x = x, y = y), color = "green") +
-      labs(title = title, x = "Exchange Rate", y = "Date") +
-      theme_solarized()
-    p
-  })
-  output$train_data_plot <- renderPlot({
-    train_data_plot
-  })
-}
-
 library("wordcloud")
 library("tm")
 library("SnowballC")
 library("RColorBrewer")
 #source("script/api-key.R")
+source("script/functions.R")
+source("script/forecast.R")
+
+
+
 
 # Change the next four lines based on your own consumer_key, consume_secret, access_token, and access_secret.
 consumer_key <- "Xg8vT7FzyHPHtgTmgOyezAE82"
@@ -126,13 +92,47 @@ for (row in 1:nrow(d)) {
 #removeWords("+0000",display$Date_and_Time)
 #formatted <- kable(display)
 
-
+# Define the server
 server <- function(input, output) {
+  output$crptoline_1 <- renderPlot({
+    coin_history_wanted_1 <- coin_history %>%
+      filter(Currency == input$crypto_1) %>%
+      filter(year == input$time_year) %>%
+      filter(month == input$time_month)
+    title <- paste0(input$crypto_1, " in ", input$time_month, ", ", input$time_year)
+    x <- coin_history_wanted_1$day
+    y <- coin_history_wanted_1$average
+    p <- ggplot() +
+      geom_line(mapping = aes(x = x, y = y), color = "blue") +
+      labs(title = title, x = "Date", y = "Exchange Rate") +
+      theme_solarized()
+    p
+  })
+  output$cryptoline_2 <- renderPlot({
+    coin_history_wanted_2 <- coin_history %>%
+      filter(Currency == input$crypto_2) %>%
+      filter(year == input$time_year) %>%
+      filter(month == input$time_month)
+    title <- paste0(input$crypto_2, " in ", input$time_month, ", ", input$time_year)
+    x <- coin_history_wanted_2$average
+    y <- coin_history_wanted_2$day
+    p <- ggplot() +
+      geom_line(mapping = aes(x = x, y = y), color = "green") +
+      labs(title = title, x = "Exchange Rate", y = "Date") +
+      theme_solarized()
+    p
+  })
+  output$train_data_plot <- renderPlot({
+    train_data_plot
+  })
+  
   output$plot <- renderPlot({
     wordcloud(words = d$word, freq = d$freq, min.freq = 3,
               max.words=350, random.order=FALSE, rot.per=0.35,
               colors=brewer.pal(8, "Dark2"))
   })
+
+
 
 # Call the server
 shinyServer(server)
