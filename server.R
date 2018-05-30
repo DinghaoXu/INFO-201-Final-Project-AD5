@@ -38,6 +38,7 @@ server <- function(input, output) {
     p
   })
   
+  
 }
 
 # Call the server
