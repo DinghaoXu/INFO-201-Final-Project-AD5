@@ -7,13 +7,14 @@ library(wordcloud)
 library("tm")
 library("SnowballC")
 library("RColorBrewer")
+source("server.R")
 
 # Define the ui
 ui <- navbarPage(
   theme = shinytheme("readable"),
   tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
 
-  tabPanel("Introduction"),
+  tabPanel("Introduction",
   titlePanel("KOYN"),
   mainPanel(
     h1("Everything you need to know to be on top of your coin.", align = "center"),
@@ -29,7 +30,7 @@ ui <- navbarPage(
       strong("updated news"), ", and a", strong("prediction model"), "for your coin."),
     h3("Knowing your coin is essential for successful investments. 
      We make your coin make sense.", align = "center")
-  ),
+  )),
   tabPanel("Coin volatility",
            titlePanel("Coin Volatility"),
            sidebarLayout(
@@ -70,8 +71,8 @@ tabPanel(
       sidebarPanel(
         sliderInput(
           "min_freq_slider",
-          label = h3("Minimum Frequency:"), min = 0,
-          max = 6, value = 2
+          label = h3("Minimum Frequency:"), min = 1,
+          max = 10, value = 3
         )
       ),
       # Main panel which displays barplot

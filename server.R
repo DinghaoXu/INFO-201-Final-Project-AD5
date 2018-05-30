@@ -71,6 +71,7 @@ for (row in 1:nrow(d)) {
   }
 }
 
+
 #output$max_freq <- reactive({
 #max(d$freq)
 #})
@@ -132,15 +133,14 @@ server <- function(input, output) {
   output$bayesian_plot <- renderPlot({
     bayesian_plot
   })
-
+  
   output$plot <- renderPlot({
-    wordcloud(words = d$word, freq = d$freq, min.freq = 3,
+    wordcloud(words = d$word, freq = d$freq, min.freq = input$min_freq_slider,
               max.words=350, random.order=FALSE, rot.per=0.35,
               colors=brewer.pal(8, "Dark2"))
   })
 
-
+}
 
 # Call the server
 shinyServer(server)
-}
