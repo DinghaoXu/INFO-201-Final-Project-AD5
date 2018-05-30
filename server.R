@@ -103,6 +103,7 @@ for (row in 1:nrow(d)) {
   if(grepl("true", d[row,1]) || grepl("false", d[row,1]) || grepl("http", d[row,1]) || grepl("href", d[row,1]) || grepl("twitter", d[row,1]) || grepl("web", d[row,1]) || grepl("client", d[row,1])) {
     d <- d[-row,]
   }
+}
 
 #output$max_freq <- reactive({
 #max(d$freq)
