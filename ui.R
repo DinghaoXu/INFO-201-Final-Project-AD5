@@ -158,8 +158,13 @@ tabPanel(
                "-- KOYN is just the gateway for you to", em("fully"),
                "understand your coin.", align = "center"
              ),
+             p(
+               a("See our work here.", href = 'https://github.com/DinghaoXu/INFO-201-Final-Project-AD5')
+             ),
              img(src = 'https://www.linkedin.com/in/sharanjhangiani/detail/photo/',
-                 alt = "Sharan", align = "left", href = 'https://www.linkedin.com/in/sharanjhangiani/')
+                 alt = "Sharan", align = "left", href = 'https://www.linkedin.com/in/sharanjhangiani/'
+             ),
+             img(src = )
            )
            )
 )
