@@ -182,8 +182,7 @@ tabPanel(
              ),
              img(src = 'https://www.linkedin.com/in/sharanjhangiani/detail/photo/',
                  alt = "Sharan", align = "left", a("sharan", href = 'https://www.linkedin.com/in/sharanjhangiani/'
-             )),
-             img(src = )
+             ))
            )
            )
 )
