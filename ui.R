@@ -92,6 +92,7 @@ ui <- navbarPage(
           
           DT::dataTableOutput("tweets")
         )))),
+
   tabPanel("Bitcoin Forecasting Models",
            sidebarLayout(
              sidebarPanel(
@@ -103,6 +104,7 @@ ui <- navbarPage(
                plotOutput("arima_plot"),
                plotOutput("bayesian_plot"))
            )),
+
   tabPanel("Feedback",
            titlePanel("Your Feedback"),
            sliderInput(
@@ -128,6 +130,7 @@ ui <- navbarPage(
              "feedback_submit",
              label = "submit"
            )
+
   )
   # tabPanel("About Us",
   #          titlePanel("KOYN"),

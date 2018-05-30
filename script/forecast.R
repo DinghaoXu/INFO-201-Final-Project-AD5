@@ -125,3 +125,4 @@ ggplot() + geom_line(data = gegefct, aes(Date, gegefct[,2]), color = "blue") + g
 #data = as.data.frame(Train),
 #expected.model.size = 10)
 #CompareBstsModels(list("Model 1" = model1, "Model 2" = model2, "Model 3" = model3), colors = c("blue", "red", "green"))
+
