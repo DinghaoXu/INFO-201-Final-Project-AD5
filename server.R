@@ -6,6 +6,7 @@ library(ggplot2)
 library(ggthemes)
 
 source("script/functions.R")
+source("script/forecast.R")
 
 # Define the server
 server <- function(input, output) {
@@ -37,8 +38,10 @@ server <- function(input, output) {
       theme_solarized()
     p
   })
-  
-  
+
+  output$train_data_plot <- renderPlot({
+    train_data_plot
+  })
 }
 
 # Call the server
