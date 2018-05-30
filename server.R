@@ -11,6 +11,7 @@ library(ggplot2)
 library(ggthemes)
 
 source("script/functions.R")
+source("script/forecast.R")
 
 # Define the server
 server <- function(input, output) {
@@ -42,17 +43,18 @@ server <- function(input, output) {
       theme_solarized()
     p
   })
-  
-
+  output$train_data_plot <- renderPlot({
+    train_data_plot
+  })
 }
 
-library(wordcloud)
+library("wordcloud")
 library("tm")
 library("SnowballC")
 library("RColorBrewer")
 #source("script/api-key.R")
 
-# Change the next four lines based on your own consumer_key, consume_secret, access_token, and access_secret. 
+# Change the next four lines based on your own consumer_key, consume_secret, access_token, and access_secret.
 consumer_key <- "Xg8vT7FzyHPHtgTmgOyezAE82"
 consumer_secret <- "B9jZ8RqOW87Fhdz7NQeAO4GMp8JLcPFgHL0nxN7730EbojcrlD"
 access_token <- "1012610244-LeiPJYlrZVkJrANOQmTsf2ohpBrg2AYsFAjZZfd"
@@ -65,7 +67,7 @@ tweets = twitteR::twListToDF(tw)
 text <- ""
 
 for (row in 1:1000) {
-  text <- paste(text, tweets[row,])  
+  text <- paste(text, tweets[row,])
 }
 
 data <- Corpus(VectorSource(text))
@@ -82,7 +84,7 @@ data <- tm_map(data, removeNumbers)
 data <- tm_map(data, removeWords, stopwords("english"))
 # Remove your own stop word
 # specify your stopwords as a character vector
-data <- tm_map(data, removeWords, c("RT", "@")) 
+data <- tm_map(data, removeWords, c("RT", "@"))
 # Remove punctuations
 data <- tm_map(data, removePunctuation)
 # Eliminate extra white spaces
@@ -110,7 +112,7 @@ for (row in 1:nrow(d)) {
 #})
 #ALL FOR DISPLAYING TWEETS
 #display <- select(twitter_data, user.profile_image_url, text, created_at, user.followers_count)
-#Change column names 
+#Change column names
 
 #colnames(display) <- c("Profile_Picture", "Tweet", "Date_and_Time", "Followers")
 
@@ -128,8 +130,8 @@ for (row in 1:nrow(d)) {
 server <- function(input, output) {
   output$plot <- renderPlot({
     wordcloud(words = d$word, freq = d$freq, min.freq = 3,
-              max.words=350, random.order=FALSE, rot.per=0.35, 
-              colors=brewer.pal(8, "Dark2")) 
+              max.words=350, random.order=FALSE, rot.per=0.35,
+              colors=brewer.pal(8, "Dark2"))
   })
 
 # Call the server

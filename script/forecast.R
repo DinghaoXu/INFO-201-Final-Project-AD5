@@ -13,8 +13,8 @@ library("tseries")
 library("TTR")
 
 #importing data
-train <- read.csv("train.csv")
-test <- read.csv("test.csv")
+train <- read.csv("script/train.csv")
+test <- read.csv("script/test.csv")
 head(train)
 testdata <- test[,2]
 #Converting data for analysis
@@ -50,8 +50,8 @@ for(i in 1:nrow(train)){
   }
 }
 train <- train[, - 8] #Removing column 8
-ggplot(train, aes(Date, Close)) + geom_line() + scale_x_date("year") + ylim(0,10000) + ylab("Closing Price")
-
+train_data_plot <- ggplot(train, aes(Date, Close)) + geom_line() + scale_x_date("year") + ylim(0,10000) + ylab("Closing Price")
+train_data_plot
 #Convert data set to time series
 Train <- xts(train[, -1], order.by = as.POSIXct(train$Date))
 tsr <- ts(Train[,4], frequency = 365.25,start = c(2013,4,27))
@@ -92,7 +92,7 @@ plot(forecast(gege, h = 10), ylim = c(0,10000))
 ggplot() + geom_line(data = gegefct, aes(Date, gegefct[,2]), color = "blue") + geom_line(data = gegefct, aes(Date, gegefct[,3]), color = "Dark Red")
 
 ss <- AddLocalLinearTrend(list(), Train[,4]) #Adding linear trend to model
-ss <- AddSeasonal(ss, Train[,4], nseasons = 365.25) #Adding seasonal trend to model
+ss <- AddSeasonal(ss, Train[,4], nseasons = 365) #Adding seasonal trend to model
 model1 <- bsts(Train[,4],
                state.specification = ss,
                niter = 10)

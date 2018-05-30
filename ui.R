@@ -62,7 +62,8 @@ tabPanel(
       mainPanel(
         plotOutput("plot", width = "100%")
       )))),
-  tabPanel("Holt's Forecasting Model:"),
+  tabPanel("Holt's Forecasting Model:",
+           plotOutput("train_data_plot")),
   tabPanel("Exponential Triple Smoothing Model:"),
   tabPanel("ARIMA Forecasting Model:"),
   tabPanel("Forecasting Using Bayesian Regression Model:"),
