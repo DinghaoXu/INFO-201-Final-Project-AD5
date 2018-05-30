@@ -125,4 +125,3 @@ model3 <- bsts(Close ~ ., state.specification = ss,
                data = as.data.frame(Train),
                expected.model.size = 10)
 CompareBstsModels(list("Model 1" = model1, "Model 2" = model2, "Model 3" = model3), colors = c("blue", "red", "green"))
-

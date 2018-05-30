@@ -7,13 +7,14 @@ library(wordcloud)
 library("tm")
 library("SnowballC")
 library("RColorBrewer")
+source("server.R")
 
 # Define the ui
 ui <- navbarPage(
   theme = shinytheme("darkly"),
   tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
 
-  tabPanel("Introduction"),
+  tabPanel("Introduction",
   titlePanel("KOYN"),
   mainPanel(
             style = "font-family: 'Source Sans Pro';
@@ -34,7 +35,7 @@ ui <- navbarPage(
       strong("updated news"), ", and a", strong("prediction model"), "for your coin."),
     h3("Knowing your coin is essential for successful investments.
      We make your coin make sense.", align = "center")
-  ),
+  )),
   tabPanel("Coin volatility",
            titlePanel("Coin Volatility"),
            sidebarLayout(
@@ -75,13 +76,20 @@ tabPanel(
       sidebarPanel(
         sliderInput(
           "min_freq_slider",
-          label = h3("Minimum Frequency:"), min = 0,
-          max = 6, value = 2
-        )
+          label = h3("Minimum Frequency:"), min = 1,
+          max = 20, value = 3
+        ),
+        textInput(
+          "keyword",
+          label = "Type a Keyword", value = "#bitcoin"
+        ),
+        plotOutput("plot")  
       ),
+      
       # Main panel which displays barplot
       mainPanel(
-        plotOutput("plot", width = "200%", height = "200%")
+        
+        DT::dataTableOutput("tweets")
       )))),
   tabPanel("Bitcoin Forecasting Models:",
            mainPanel(
