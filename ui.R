@@ -60,7 +60,8 @@ ui <- navbarPage(
                tags$h3("Here is the first plot"),
                plotOutput("crptoline_1"),
                tags$h3("Here is the second plot"),
-               plotOutput("cryptoline_2")
+               plotOutput("cryptoline_2"),
+               plotlyOutput("piechart")
              )
            )
            ),
@@ -97,25 +98,25 @@ tabPanel(
   tabPanel("Bayesian Forecasting Model:",
            plotOutput("bayesian_plot")),
   tabPanel("Feedback",
-           titlePanel("Your Feedbacks"),
+           titlePanel("Your Feedback"),
            sliderInput(
              "feedback_1",
-             label = "1. Overall, how would you rate our app ?",
+             label = "1. Overall, how would you rate our app?",
              min = 0, max = 10, value = 5
            ),
            sliderInput(
              "feedback_2",
-             label = "2. How would you rate the layout of the app ?",
+             label = "2. How would you rate the layout of the app?",
              min = 0, max = 10, value = 5
            ),
            sliderInput(
              "feedback_3",
-             label = "3. How would you rate the usability of the app ?",
+             label = "3. How would you rate the usability of the app?",
              min = 0, max = 10, value = 5
            ),
            textInput(
              "feedback_4",
-             label = "4. Please give us some advices about the part we can improve on"
+             label = "4. Any comments/advice!"
            ),
            actionButton(
              "feedback_submit",

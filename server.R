@@ -17,6 +17,7 @@ library(DT)
 source("script/api-key.R")
 source("script/functions.R")
 source("script/forecast.R")
+library(plotly)
 
 
 # Define the server
@@ -49,6 +50,31 @@ server <- function(input, output) {
       theme_solarized()
     p
   })
+  
+  output$piechart <- renderPlotly({
+    wanted_data <- coin_history %>% filter(year == input$time_year) %>%
+      filter(month == input$time_month)
+    piechart_data <- wanted_data %>% group_by(Currency) %>% summarize(max(High))
+    colnames(piechart_data) <- c("currency", "price")
+    piechart_data$percentages <-  as.numeric(piechart_data$price)/ sum(as.numeric(piechart_data$price))
+    
+    p <- plot_ly(piechart_data, labels = ~currency, values = ~percentages, type = 'pie',
+                 textposition = 'inside',
+                 textinfo = 'label+percent',
+                 insidetextfont = list(color = '#FFFFFF'),
+                 hoverinfo = 'text',
+                 text = ~paste('$', price),
+                 marker = list(colors = colors,
+                               line = list(color = '#FFFFFF', width = 1)),
+                 #The 'pull' attribute can also be used to create space between the sectors
+                 showlegend = FALSE) %>%
+      layout(title = 'Currency prices based on Month and Year',
+             xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+             yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+    
+    
+  })
+  
   output$ets_plot <- renderPlot({
     plot(forecast(ETS, h = 10), ylim = c(0,10000))
   })
