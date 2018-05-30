@@ -60,12 +60,14 @@ tabPanel(
       ),
       # Main panel which displays barplot
       mainPanel(
-        plotOutput("plot", width = "100%")
+        plotOutput("plot", width = "200%", height = "200%")
       )))),
   tabPanel("Holt's Forecasting Model:",
-           plotOutput("holt_plot")),
+           mainPanel(
+           plotOutput("holt_plot"))),
   tabPanel("Exponential Triple Smoothing Model:",
-           plotOutput("ets_plot")),
+           mainPanel(
+           plotOutput("ets_plot"))),
   tabPanel("ARIMA Forecasting Model:",
            plotOutput("arima_plot")),
   tabPanel("Bayesian Forecasting Model:",
