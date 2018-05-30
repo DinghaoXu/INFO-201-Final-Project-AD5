@@ -60,35 +60,40 @@ plot(Train$Close,type='l',lwd = 1.5,col='red', ylim = c(0,10000), main = "Bitcoi
 dects <- decompose(tsr) #Obtaining the trends and seasonality
 plot(dects)
 
+
+# ------------------------- HOLT MODEL -------------------------
 holtt <-  holt(Train[1289:1655,'Close'], type = "additive", damped = F) #holt forecast values
 holtf <- forecast(holtt, h = 10)
 holtdf <- as.data.frame(holtf)
 plot(holtf, ylim = c(0,10000))
 holtfdf <- cbind(test, holtdf[,1])
 accuracy(holtdf[,1], testdata)
-ggplot() + geom_line(data = holtfdf, aes(Date, holtfdf[,2]), color = "blue") + geom_line(data = holtfdf, aes(Date, holtfdf[,3]), color = "Dark Red")
+holt_plot <- ggplot() + geom_line(data = holtfdf, aes(Date, holtfdf[,2]), color = "blue") + geom_line(data = holtfdf, aes(Date, holtfdf[,3]), color = "Dark Red")
 
+
+# ------------------------- ETS MODEL -------------------------
 ETS <- ets((Train[,'Close'])) # ETS forecast values
 ETSf <- forecast(ETS, h = 10)
 etsdf <- as.data.frame(ETSf)
-plot(forecast(ETS, h = 10), ylim = c(0,10000)) #ETS forecast plot works perfectly
+ets_plot <- plot(forecast(ETS, h = 10), ylim = c(0,10000)) #ETS forecast plot works perfectly
 etsp <- predict(ETS, n.ahead = 10, prediction.interval = T, level = 0.95)
 accuracy(etsdf[,1], testdata)
+
+# ------------------------- TESTS TO SEE TSDF ACCURACY -------------------------
 
 tsdf <- diff(Train[,4], lag = 2)
 tsdf <- tsdf[!is.na(tsdf)]
 adf.test(tsdf)
-plot(tsdf, type = 1, ylim = c(-1000, 1000))
+# plot(tsdf, type = 1, ylim = c(-1000, 1000))
 
-#ACF AND PACF plots
+# ------------------ ACF AND PACF plots ------------------------
 acf(tsdf)
 pacf(tsdf)
-
 gege <- arima(Train[,4], order = c(4,2,11))
 gegef <- as.data.frame(forecast(gege, h = 10))
 accuracy(gegef[,1], testdata)
 gegefct <- cbind(test, gegef[,1])
-plot(forecast(gege, h = 10), ylim = c(0,10000))
+arima_plot <- plot(forecast(gege, h = 10), ylim = c(0,10000))
 ggplot() + geom_line(data = gegefct, aes(Date, gegefct[,2]), color = "blue") + geom_line(data = gegefct, aes(Date, gegefct[,3]), color = "Dark Red")
 
 ss <- AddLocalLinearTrend(list(), Train[,4]) #Adding linear trend to model
@@ -97,7 +102,8 @@ model1 <- bsts(Train[,4],
                state.specification = ss,
                niter = 10)
 
-plot(model1, ylim = c(0,10000)) #Plot based on bayesian regression of the model
+bayesian_plot <- plot(model1, ylim = c(0,10000)) #Plot based on bayesian regression of the model
+bayesian_plot
 pred1 <- predict(model1, horizon = 10)
 plot(pred1, plot.original = 50,ylim = c(0,9000))
 pred1$mean

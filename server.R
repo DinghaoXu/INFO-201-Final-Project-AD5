@@ -18,8 +18,6 @@ source("script/functions.R")
 source("script/forecast.R")
 
 
-
-
 # Change the next four lines based on your own consumer_key, consume_secret, access_token, and access_secret.
 consumer_key <- api_consumer_key
 consumer_secret <- api_consumer_secret
@@ -122,10 +120,19 @@ server <- function(input, output) {
       theme_solarized()
     p
   })
-  output$train_data_plot <- renderPlot({
-    train_data_plot
+  output$ets_plot <- renderPlot({
+    ets_plot
   })
-  
+  output$holt_plot <- renderPlot({
+    holt_plot
+  })
+  output$arima_plot <- renderPlot({
+    arima_plot
+  })
+  output$bayesian_plot <- renderPlot({
+    bayesian_plot
+  })
+
   output$plot <- renderPlot({
     wordcloud(words = d$word, freq = d$freq, min.freq = 3,
               max.words=350, random.order=FALSE, rot.per=0.35,

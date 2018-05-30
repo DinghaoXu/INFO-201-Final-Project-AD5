@@ -63,10 +63,13 @@ tabPanel(
         plotOutput("plot", width = "100%")
       )))),
   tabPanel("Holt's Forecasting Model:",
-           plotOutput("train_data_plot")),
-  tabPanel("Exponential Triple Smoothing Model:"),
-  tabPanel("ARIMA Forecasting Model:"),
-  tabPanel("Forecasting Using Bayesian Regression Model:"),
+           plotOutput("holt_plot")),
+  tabPanel("Exponential Triple Smoothing Model:",
+           plotOutput("ets_plot")),
+  tabPanel("ARIMA Forecasting Model:",
+           plotOutput("arima_plot")),
+  tabPanel("Bayesian Forecasting Model:",
+           plotOutput("bayesian_plot")),
   tabPanel("Feedback",
            titlePanel("Your Feedbacks"),
            sliderInput(
