@@ -18,7 +18,6 @@ ui <- navbarPage(
           mainPanel(
             h1("Everything you need to know to be on top of your coin.", 
                align = "center"),
-            img(src='https://goo.gl/images/ZQQiZQ', alt = "blockchain"),
             p("KOYN is an", em("interactive"), "outlet for you to learn not
               only basic information regarding your coin, but also deeper
               insights and comparisons to support you in your investments.
