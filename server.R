@@ -113,11 +113,11 @@ server <- function(input, output) {
       filter(year == input$time_year) %>%
       filter(month == input$time_month)
     title <- paste0(input$crypto_2, " in ", input$time_month, ", ", input$time_year)
-    x <- coin_history_wanted_2$average
-    y <- coin_history_wanted_2$day
+    x <- coin_history_wanted_2$day
+    y <- coin_history_wanted_2$average
     p <- ggplot() +
       geom_line(mapping = aes(x = x, y = y), color = "green") +
-      labs(title = title, x = "Exchange Rate", y = "Date") +
+      labs(title = title, x = "Date", y = "Exchange Rate") +
       theme_solarized()
     p
   })
